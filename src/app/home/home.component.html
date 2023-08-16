@@ -1,0 +1,37 @@
+<h3>home works and has inline style and we also have a {{ title }}</h3>
+<h5>{{ fromParent }}</h5>
+
+<!-- property binding -->
+<img [src]="imgUrl" alt="" />
+
+<!-- class binding -->
+<h6 [class.text-red]="showClass">Showing class binding</h6>
+
+<!-- inline style binding -->
+<h6 [style.color]="showClass ? 'red' : 'blue'">Inline Style binding</h6>
+<hr />
+<!-- also event binding done with () -->
+<!-- emit data via an event  -->
+<button (click)="sendMessage()">Click to emit from child to parent</button>
+<hr />
+<!-- event filtering(filter events based on certain conditions without using if) -->
+<button (keyup.enter)="sendMessage()">Event Filtering</button>
+
+<hr />
+<!-- template variable to get specific values -->
+<input
+  type="text"
+  (keyup)="sendTemplateVariable(username.value)"
+  placeholder="template variable"
+  #username
+/>
+
+<br />
+<!-- two way data binding -->
+
+<input
+  type="text"
+  [(ngModel)]="userNameForTwoWay"
+  (keyup)="functionForTwoWay()"
+  placeholder="two way data binding"
+/>

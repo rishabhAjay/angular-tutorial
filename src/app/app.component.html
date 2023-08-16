@@ -1,0 +1,11 @@
+<h1>Angular App</h1>
+
+<!-- consume the data from the event with the same name via a consumer function -->
+<app-home
+  [fromParent]="parentComponentVariable"
+  (messageEvent)="receiveMessage($event)"
+></app-home>
+
+<p>{{ fromChildCompLocal }}</p>
+
+<p>{{ fromChildComponentViaEvent }}</p>
