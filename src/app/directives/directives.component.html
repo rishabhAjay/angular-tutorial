@@ -1,0 +1,46 @@
+<h1>directives!</h1>
+
+<!-- manipulate the array for change detection -->
+<button (click)="addPost()">Add new posts</button>
+
+<!-- ng for -->
+<ul *ngFor="let post of postsArray; let i = index">
+  <li>{{ post }}</li>
+  <button (click)="deletePost(i)">Delete</button>
+</ul>
+
+<!-- ng if -->
+<p *ngIf="postsArray.length === 0; else thereIsData">
+  There is no data in array
+</p>
+
+<!-- ng template is used to prevent multiple ngIf conditions and include else -->
+<!-- ng template does not show up if there is no variable binding it with condition -->
+<ng-template #thereIsData> There is data in your array! </ng-template>
+
+<!-- ng switch -->
+
+<div [ngSwitch]="switchVariable">
+  <h3 *ngSwitchCase="'A1'">First NG switch</h3>
+  <h3 *ngSwitchCase="'A2'">Second NG switch</h3>
+  <h3 *ngSwitchCase="'A3'">Third NG switch</h3>
+  <h3 *ngSwitchDefault>Default NG switchholder</h3>
+</div>
+
+<!-- ng style -->
+<h3
+  [ngStyle]="{
+    color: ngStyleVariable ? 'red' : 'blue'
+  }"
+>
+  NG style
+</h3>
+
+<!-- ng class  -->
+<h3
+  [ngClass]="{
+    ' ng-style-class': ngStyleVariable
+  }"
+>
+  NG Class
+</h3>

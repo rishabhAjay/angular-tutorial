@@ -1,0 +1,80 @@
+<h1>template driven form</h1>
+
+<!-- define an ngForm template variable and an onsubmit that takes the variable
+# a form group is a whole form(your ngForm directive)
+# a form control is individual fields(your ngModel directive)
+# these are different from the bootstrap form classes
+-->
+
+<form
+  #f="ngForm"
+  (ngSubmit)="onSubmit(f)"
+  [validated]="email.touched || password.touched || toggle.touched"
+  novalidate
+  cForm
+  class="template-form needs-validation"
+>
+  <div class="mb-3 inputs">
+    <label cLabel for="inputEmail-1">Email address</label>
+    <!-- doing the onChange is useful when you wish to do validation on the go -->
+    <input
+      ngModel
+      cFormControl
+      id="inputEmail-1"
+      class="is-valid"
+      type="email"
+      name="email"
+      #email="ngModel"
+      (change)="getValue(email)"
+      required
+      minlength="5"
+    />
+
+    <!-- validations based on ngForm default properties -->
+    <c-form-feedback
+      *ngIf="email.errors?.required ? true : false"
+      [valid]="false"
+      >Please choose an email.</c-form-feedback
+    >
+    <c-form-feedback
+      *ngIf="email.errors?.minlength ? true : false"
+      [valid]="false"
+      >Please choose an email with 5 characters or more.</c-form-feedback
+    >
+    <c-form-feedback *ngIf="email.dirty ? true : false" [valid]="false"
+      >Please choose a valid email .</c-form-feedback
+    >
+    <div cFormText>We'll never share your email with anyone else</div>
+  </div>
+
+  <div class="mb-3 inputs">
+    <label cLabel for="inputPassword-1">Password</label>
+    <input
+      ngModel
+      class="form-control"
+      id="inputPassword-1"
+      type="password"
+      name="password"
+      #password="ngModel"
+      (change)="getValue(password)"
+      required
+    />
+    <c-form-feedback [valid]="false">Please choose a password.</c-form-feedback>
+  </div>
+  <c-form-check class="mb-3">
+    <input
+      ngModel
+      class="form-check-input"
+      id="checkMeOut-1"
+      type="checkbox"
+      name="toggle"
+      #toggle="ngModel"
+      required
+    />
+    <label cFormCheckLabel for="checkMeOut-1">Check me out</label>
+    <c-form-feedback [valid]="false">Check this out.</c-form-feedback>
+  </c-form-check>
+
+  <!-- disable the button if there is any invalid input -->
+  <input cButton color="primary" [disabled]="f.invalid" type="submit" />
+</form>
