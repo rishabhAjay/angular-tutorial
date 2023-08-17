@@ -4,3 +4,12 @@
   justify-content: center;
   margin: 0 20% 0 20%;
 }
+
+.is-invalid {
+  border: 1px solid red !important;
+}
+
+.is-normal {
+  border: 1px solid black;
+  border-radius: 5px;
+}

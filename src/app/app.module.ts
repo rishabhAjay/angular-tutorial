@@ -12,6 +12,9 @@ import { ServicesModuleComponent } from './services-module/services-module.compo
 import { TemplateFormsComponent } from './template-forms/template-forms.component';
 import { FormModule, ButtonModule } from '@coreui/angular';
 import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
+import { InvalidDirective } from './invalid-directive.component';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   //include all components within the declarations, you also have to include
   // custom pipes here
@@ -24,12 +27,15 @@ import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.componen
     ServicesModuleComponent,
     TemplateFormsComponent,
     ReactiveFormsComponent,
+    InvalidDirective,
   ],
 
   // import the modules
   imports: [
     BrowserModule,
     AppRoutingModule,
+    TagInputModule,
+    BrowserAnimationsModule,
     FormsModule,
     FormModule,
     ButtonModule,

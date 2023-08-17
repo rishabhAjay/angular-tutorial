@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TagModel } from 'ngx-chips/core/tag-model';
+import { Observable, filter, of } from 'rxjs';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -8,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ReactiveFormsComponent {
   form: any;
+
   constructor() {
     //same as assigning a template variable to ngForm directive
     this.form = new FormGroup({
@@ -16,13 +19,27 @@ export class ReactiveFormsComponent {
         Validators.email,
         Validators.minLength(5),
       ]),
-      password: new FormControl(),
-      toggle: new FormControl(),
+      password: new FormControl('', [Validators.required]),
+      toggle: new FormControl('', [Validators.required]),
+
+      contactDetails: new FormGroup({
+        address: new FormControl('', [Validators.required]),
+        skills: new FormControl([], [Validators.required]),
+      }),
+    });
+  }
+  onAddSkill(tag: any) {
+    console.log(tag);
+    tag.items.map((element: object) => {
+      this.skills.push(new FormControl(element));
     });
   }
 
+  makeInputTouched() {
+    this.skills.markAsTouched();
+  }
   onSubmit() {
-    console.log(this.form);
+    console.log(this.skills);
   }
   get email() {
     return this.form.get('email');
@@ -32,5 +49,13 @@ export class ReactiveFormsComponent {
   }
   get toggle() {
     return this.form.get('toggle');
+  }
+
+  get address() {
+    return this.form.get('contactDetails.address');
+  }
+
+  get skills() {
+    return this.form.get('contactDetails.skills');
   }
 }

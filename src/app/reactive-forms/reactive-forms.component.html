@@ -1,5 +1,4 @@
-<h1>reactive-forms works!</h1>
-<h1>template driven form</h1>
+<h1>reactive-forms !</h1>
 
 <!-- define an ngForm template variable and an onsubmit that takes the variable
 # a form group is a whole form(your ngForm directive)
@@ -10,7 +9,7 @@
 <form
   [formGroup]="form"
   cForm
-  [validated]="email.touched || password.touched || toggle.touched"
+  [validated]="form.touched"
   novalidate
   (ngSubmit)="onSubmit()"
   class="reactive-form"
@@ -24,19 +23,18 @@
       type="email"
       formControlName="email"
       name="email"
+      [invalid]="true"
     />
 
-    <div>
-      <c-form-feedback *ngIf="email.errors?.required" [valid]="false"
-        >Please choose an email.</c-form-feedback
-      >
-      <c-form-feedback *ngIf="email.errors?.minlength" [valid]="false"
-        >Please choose an email with 5 characters or more.</c-form-feedback
-      >
-      <c-form-feedback *ngIf="email.dirty" [valid]="false"
-        >Please choose a valid email .</c-form-feedback
-      >
-    </div>
+    <c-form-feedback *ngIf="email.errors?.required" [valid]="false"
+      >Please choose an email.</c-form-feedback
+    >
+    <c-form-feedback *ngIf="email.errors?.minlength" [valid]="false"
+      >Please choose an email with 5 characters or more.</c-form-feedback
+    >
+    <c-form-feedback *ngIf="email.dirty" [valid]="false"
+      >Please choose a valid email .</c-form-feedback
+    >
 
     <div cFormText>We'll never share your email with anyone else</div>
   </div>
@@ -48,6 +46,7 @@
       id="inputPassword-2"
       type="password"
       formControlName="password"
+      [invalid]="true"
     />
     <c-form-feedback [valid]="false">Please choose a password.</c-form-feedback>
   </div>
@@ -57,11 +56,54 @@
       id="checkMeOut-2"
       type="checkbox"
       formControlName="toggle"
+      [invalid]="true"
     />
     <label cFormCheckLabel for="checkMeOut-2">Check me out</label>
     <c-form-feedback [valid]="false">Check this out.</c-form-feedback>
   </c-form-check>
 
+  <!-- sub form group needs to be having the formGroupName directive -->
+  <ng-container formGroupName="contactDetails">
+    <div class="mb-3 inputs">
+      <label cLabel for="address-2">Address</label>
+      <input
+        cFormControl
+        id="address-2"
+        type="text"
+        formControlName="address"
+        [invalid]="true"
+      />
+      <c-form-feedback *ngIf="address.errors.required" [valid]="false"
+        >Please type in an address.</c-form-feedback
+      >
+    </div>
+    <div class="mb-3 inputs">
+      <label cLabel for="skills-2">Skills</label>
+      <tag-input
+        theme="minimal"
+        [class]="
+          skills.errors?.required && skills.touched ? 'is-invalid' : 'is-normal'
+        "
+        id="skills-2"
+        formControlName="skills"
+        [invalid]="true"
+      ></tag-input>
+      <c-form-feedback *ngIf="skills.errors?.required" [valid]="false"
+        >Please type in your skills.</c-form-feedback
+      >
+    </div>
+  </ng-container>
+
+  <!-- <tag-input
+        theme="minimal"
+        id="skills-2"
+        [class]="
+          skills.errors?.required && skills.touched ? 'is-invalid' : 'is-normal'
+        "
+        #skill
+        (keyup.enter)="onAddSkill(skill)"
+        (onFocus)="makeInputTouched()"
+      ></tag-input> -->
   <!-- disable the button if there is any invalid input -->
-  <button cButton color="primary" type="submit">Submit</button>
+  <button cButton color="primary" d type="submit">Submit</button>
 </form>
