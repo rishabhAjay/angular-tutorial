@@ -1,0 +1,113 @@
+<h1>form-builder!</h1>
+
+<form
+  [formGroup]="form"
+  cForm
+  [validated]="form.touched"
+  novalidate
+  (ngSubmit)="onSubmit()"
+  class="form-builder"
+>
+  <div class="mb-3 inputs">
+    <label cLabel for="inputEmail-2">Email address</label>
+    <!-- doing the onChange is useful when you wish to do validation on the go -->
+    <input
+      cFormControl
+      id="inputEmail-2"
+      type="email"
+      formControlName="email"
+      name="email"
+      [invalid]="true"
+    />
+
+    <c-form-feedback *ngIf="fc.email.errors?.required" [valid]="false"
+      >Please choose an email.</c-form-feedback
+    >
+    <c-form-feedback *ngIf="fc.email.errors?.minlength" [valid]="false"
+      >Please choose an email with 5 characters or more.</c-form-feedback
+    >
+    <c-form-feedback *ngIf="fc.email.dirty" [valid]="false"
+      >Please choose a valid email .</c-form-feedback
+    >
+    <c-form-feedback *ngIf="fc.email.errors.spaceExists" [valid]="false"
+      >Email cannot contain spaces .</c-form-feedback
+    >
+
+    <div cFormText>We'll never share your email with anyone else</div>
+  </div>
+
+  <div class="mb-3 inputs">
+    <label cLabel for="inputPassword-2">Password</label>
+    <input
+      cFormControl
+      id="inputPassword-2"
+      type="password"
+      formControlName="password"
+      [invalid]="true"
+    />
+    <c-form-feedback [valid]="false">Please choose a password.</c-form-feedback>
+  </div>
+  <c-form-check class="mb-3">
+    <input
+      cFormCheckInput
+      id="checkMeOut-2"
+      type="checkbox"
+      formControlName="toggle"
+      [invalid]="true"
+    />
+    <label cFormCheckLabel for="checkMeOut-2">Check me out</label>
+    <c-form-feedback [valid]="false">Check this out.</c-form-feedback>
+  </c-form-check>
+
+  <!-- sub form group needs to be having the formGroupName directive -->
+  <ng-container formGroupName="contactDetails">
+    <div class="mb-3 inputs">
+      <label cLabel for="address-2">Address</label>
+      <input
+        cFormControl
+        id="address-2"
+        type="text"
+        formControlName="address"
+        [invalid]="true"
+      />
+      <c-form-feedback
+        *ngIf="contactDetailsFc.address.errors.required"
+        [valid]="false"
+        >Please type in an address.</c-form-feedback
+      >
+    </div>
+    <div class="mb-3 inputs">
+      <label cLabel for="skills-2">Skills</label>
+      <tag-input
+        theme="minimal"
+        [class]="
+          contactDetailsFc.skills?.errors?.required &&
+          contactDetailsFc?.skills.touched
+            ? 'is-invalid'
+            : 'is-normal'
+        "
+        id="skills-2"
+        formControlName="skills"
+        [invalid]="true"
+      ></tag-input>
+      <c-form-feedback
+        *ngIf="contactDetailsFc.skills.errors?.required"
+        [valid]="false"
+        >Please type in your skills.</c-form-feedback
+      >
+    </div>
+  </ng-container>
+
+  <!-- <tag-input
+        theme="minimal"
+        id="skills-2"
+        [class]="
+          skills.errors?.required && skills.touched ? 'is-invalid' : 'is-normal'
+        "
+        #skill
+        (keyup.enter)="onAddSkill(skill)"
+        (onFocus)="makeInputTouched()"
+      ></tag-input> -->
+  <!-- disable the button if there is any invalid input -->
+  <button cButton color="primary" type="submit">Submit</button>
+</form>

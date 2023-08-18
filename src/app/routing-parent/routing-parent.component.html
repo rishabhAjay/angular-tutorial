@@ -1,0 +1,26 @@
+<p>routing-parent works!</p>
+
+<!-- if you use href with anchor tag then the page reloads -->
+<button
+  routerLink="/child-1"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+>
+  routing to child component
+</button>
+<button
+  routerLink="/"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+>
+  Home
+</button>
+
+<ul *ngFor="let arrayItem of arrayList; let i = index">
+  <li>
+    {{ arrayItem }}
+    <button [routerLink]="['/array', i]">viewport</button>
+  </li>
+</ul>
+
+<button (click)="onSubmit()">Navigate programmatically via ts file</button>

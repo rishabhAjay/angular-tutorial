@@ -15,6 +15,12 @@ import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.componen
 import { InvalidDirective } from './invalid-directive.component';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
+import { RoutingParentComponent } from './routing-parent/routing-parent.component';
+import { RoutingChildOneComponent } from './routing-child-one/routing-child-one.component';
+import { HomeRoutingComponent } from './home-routing/home-routing.component';
+import { ArrayItemComponent } from './array-item/array-item.component';
+import { FornotfourComponent } from './fornotfour/fornotfour.component';
 @NgModule({
   //include all components within the declarations, you also have to include
   // custom pipes here
@@ -28,6 +34,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TemplateFormsComponent,
     ReactiveFormsComponent,
     InvalidDirective,
+    FormBuilderComponent,
+    RoutingParentComponent,
+    RoutingChildOneComponent,
+    HomeRoutingComponent,
+    ArrayItemComponent,
+    FornotfourComponent,
   ],
 
   // import the modules
@@ -35,7 +47,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     TagInputModule,
-    BrowserAnimationsModule,
     FormsModule,
     FormModule,
     ButtonModule,
